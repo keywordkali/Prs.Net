@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Prs.Net.Models;
 
 namespace Prs.Net.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201210210150_added field in Vendor and made it nullable")]
+    partial class addedfieldinVendorandmadeitnullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,7 +54,6 @@ namespace Prs.Net.Migrations
                         .UseIdentityColumn();
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
@@ -63,8 +64,9 @@ namespace Prs.Net.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(12,2)");
+                    b.Property<double>("Price")
+                        .HasMaxLength(30)
+                        .HasColumnType("float");
 
                     b.Property<string>("Unit")
                         .HasColumnType("nvarchar(max)");
@@ -99,7 +101,6 @@ namespace Prs.Net.Migrations
                         .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasMaxLength(80)
                         .HasColumnType("nvarchar(80)");
 
@@ -111,15 +112,13 @@ namespace Prs.Net.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Status")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("SubmittedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("Total")
-                        .HasColumnType("decimal(12,2)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
